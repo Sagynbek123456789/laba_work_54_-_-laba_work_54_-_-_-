@@ -25,3 +25,15 @@ def product_add_view(request):
             category_id=request.POST.get('category_id')
         )
         return redirect('product_view', pk=product.pk)
+
+
+def category_add_view(request):
+    if request.method == "GET":
+        return render(request, 'category_create.html')
+    elif request.method == "POST":
+        Category.objects.create(
+            title=request.POST.get('title'),
+            descriptions=request.POST.get('descriptions')
+        )
+        return redirect('index')
+
