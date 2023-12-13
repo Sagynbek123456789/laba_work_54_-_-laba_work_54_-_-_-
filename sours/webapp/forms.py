@@ -1,24 +1,20 @@
 from django import forms
+from webapp.models import Category, Product
 
 
-class CategoryForm(forms.ModelForm):
+class ProductForm(forms.Form):
     title = forms.CharField(max_length=50, label='Наименование')
-    descriptions = forms.CharField(max_length=200, required=False, label='Описание')
-
-
-class ProductForm(forms.ModelForm):
-    title = forms.CharField(max_length=50, label='Наименование')
-    descriptions = forms.CharField(max_length=200, required=False, label='Описание')
+    descriptions = forms.CharField(max_length=200, label='Описание')
+    category = forms.ModelChoiceField(label='Категория', queryset=Category.objects.all())
+    price = forms.DecimalField(decimal_places=2, max_digits=7,  label='Стоимость')
     image = forms.URLField(label='Изображение')
+    quantity = forms.IntegerField(label='остаток', min_value=0)
 
 
-class ValidationError:
-    pass
-
-
-#
-# class TaskForm(forms.Form):
-#     description = forms.CharField(max_length=60, required=True, label='Описание')
-#     status = forms.ChoiceField(choices=status_choices, label='Статус')
-#     date_of_completion = forms.DateField(required=False, label='Дата выполнения')
-#
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        title_old = self.initial.get('title')
+        if not title_old or title !=title_old:
+            if Product.objects.filter(title=title).exists():
+                raise forms.ValidationError('Продукт с таким названием существует')
+            return title
