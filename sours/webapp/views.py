@@ -3,7 +3,7 @@ from webapp.models import Product, Category
 
 
 def products_view(request):
-    products = Product.objects.all()
+    products = Product.objects.exclude(quantity=0)
     return render(request, 'products_list.html', {'products': products})
 
 
@@ -36,4 +36,3 @@ def category_add_view(request):
             descriptions=request.POST.get('descriptions')
         )
         return redirect('index')
-
