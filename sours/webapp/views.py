@@ -8,6 +8,12 @@ def products_view(request):
     return render(request, 'products_list.html', {'products': products})
 
 
+def products_definitely_category_view(request, category_title):
+    products = Product.objects.exclude(quantity=0).filter(category__title=category_title).order_by('category__title',
+                                                                                                   'title')
+    return render(request, 'products_list.html', {'products': products})
+
+
 def product_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'product_view.html', {'product': product})
