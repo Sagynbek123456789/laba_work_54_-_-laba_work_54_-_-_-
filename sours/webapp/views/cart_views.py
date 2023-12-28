@@ -34,3 +34,10 @@ class CartView(TemplateView):
         context['carts'] = carts
         context['total'] = carts.aggregate(total=Sum(F('quantity')*F('product__price')))['total']
         return context
+
+
+class ProductDeleteOfCartView(View):
+    def get(self, request, *args, **kwargs):
+        product = get_object_or_404(Cart, product_id=kwargs['pk'])
+        product.delete()
+        return redirect('carts_view')
