@@ -18,11 +18,11 @@ class ProductListView(ListView):
 #     products = Product.objects.exclude(quantity=0).order_by('category__title', 'title')
 #     return render(request, 'products/products_list.html', {'products': products})
 
-
-def products_definitely_category_view(request, category_title):
-    products = Product.objects.exclude(quantity=0).filter(category__title=category_title).order_by('category__title',
-                                                                                                   'title')
-    return render(request, 'products/products_list.html', {'products': products})
+#
+# def products_definitely_category_view(request, category_title):
+#     products = Product.objects.exclude(quantity=0).filter(category__title=category_title).order_by('category__title',
+#                                                                                                    'title')
+#     return render(request, 'products/products_list.html', {'products': products})
 
 
 class ProductDetailView(DetailView):

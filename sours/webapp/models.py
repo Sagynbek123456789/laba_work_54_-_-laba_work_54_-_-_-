@@ -23,7 +23,10 @@ class Product(models.Model):
 
 
 
-
+class Cart(models.Model):
+    product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='products',
+                                verbose_name='Продукт')
+    quantity = models.PositiveIntegerField(default=0, verbose_name='Колличество')
 
 
 
