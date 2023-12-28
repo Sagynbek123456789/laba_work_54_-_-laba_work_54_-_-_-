@@ -21,8 +21,6 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=1, verbose_name='остаток')
 
 
-
-
 class Cart(models.Model):
     product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='products',
                                 verbose_name='Продукт')
