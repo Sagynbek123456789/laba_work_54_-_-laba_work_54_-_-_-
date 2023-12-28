@@ -1,5 +1,5 @@
 from django import forms
-from webapp.models import Category, Product
+from webapp.models import Category, Product, Order
 
 
 class ProductForm(forms.ModelForm):
@@ -20,3 +20,9 @@ class ProductForm(forms.ModelForm):
             if Product.objects.filter(title=title).exists():
                 raise forms.ValidationError('Продукт с таким названием существует')
             return title
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('name', 'address', 'telephone')
