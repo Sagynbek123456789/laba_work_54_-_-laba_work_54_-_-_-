@@ -27,9 +27,19 @@ class Cart(models.Model):
     quantity = models.PositiveIntegerField(default=0, verbose_name='Колличество')
 
 
+class Order(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Имя пользователя')
+    address = models.CharField(max_length=50, verbose_name='Адресс')
+    telephone = models.CharField(max_length=50, verbose_name='Телефон')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время добавления')
+    products = models.ManyToManyField('webapp.Product', related_name='orders', through='webapp.OrderProduct',
+                                      through_fields=('order', 'product'), verbose_name='Продукты')
 
 
-
+class OrderProduct(models.Model):
+    product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='product_orders')
+    order = models.ForeignKey('webapp.Order', on_delete=models.CASCADE, related_name='order_products')
+    quantity = models.PositiveIntegerField(default=0, verbose_name='Колличество')
 
 
 
