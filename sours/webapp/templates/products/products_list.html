@@ -13,7 +13,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ product.title }}</h5>
-                                <p class="card-text"><small class="text-body-secondary"><a href="{% url 'products_definitely_category_view' product.category.title %}">{{ product.category.title }}</a></small></p>
+                                <p class="card-text"><small class="text-body-secondary">{{ product.category.title }}</small></p>
                                 <p class="card-text">Price: {{ product.price }}$</p>
                                 <a href="{% url 'product_view' product.pk %}" class="card-link">See more >>>>></a>
                                 <a href="{% url 'product_update_view' product.pk %}" class="card-link">Update</a>
