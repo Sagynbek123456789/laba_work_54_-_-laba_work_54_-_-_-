@@ -3,7 +3,7 @@ from django.views.generic import View, TemplateView
 from webapp.models import Product, Category
 from webapp.forms import ProductForm
 from django.urls import reverse_lazy
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.db.models import F
 
 from webapp.models import Product, Cart
@@ -32,4 +32,5 @@ class CartView(TemplateView):
         context = super().get_context_data(**kwargs)
         carts = Cart.objects.annotate(total=F('quantity')*F('product__price'))
         context['carts'] = carts
+        context['total'] = carts.aggregate(total=Sum(F('quantity')*F('product__price')))['total']
         return context
