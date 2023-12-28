@@ -1,5 +1,5 @@
 from django.contrib import admin
-from webapp.models import Category, Product, Cart
+from webapp.models import Category, Product, Cart, Order, OrderProduct
 
 
 # Register your models here.
@@ -15,4 +15,14 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(OrderProduct)
+class OrderProductAdmin(admin.ModelAdmin):
     pass
