@@ -2,7 +2,7 @@ from django import forms
 from webapp.models import Category, Product
 
 
-class ProductForm(forms.Form):
+class ProductForm(forms.ModelForm):
     title = forms.CharField(max_length=50, label='Наименование')
     descriptions = forms.CharField(max_length=200, label='Описание')
     category = forms.ModelChoiceField(label='Категория', queryset=Category.objects.all())
